@@ -1,0 +1,194 @@
+<div class="ui-g-10 ui-g-offset-1 ui-g-nopad">
+
+    <span *ngIf="!quotationDetail;else first">
+        <div align="center">
+            <p-progressSpinner></p-progressSpinner>
+        </div>
+    </span>
+
+    <ng-template #first>
+
+        <p-fieldset class="ui-g-12" legend="Détail du devis " [toggleable]="false">
+            <p-dataView #dv class="ui-g-12 ui-g-nopad" [value]="quotationDetail.quoteElementList" [paginator]="true" [rows]="5" paginatorPosition="both"
+                filterBy="product.model" [sortField]="sortField" [sortOrder]="sortOrder">
+                <p-header>
+                    <div class="ui-helper-clearfix">
+                        <div class="ui-g">
+                            <div class="ui-g-6 filter-container">
+                                <div style="position:relative">
+                                    <input type="search" pInputText placeholder="Search by model" (keyup)="dv.filter($event.target.value)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </p-header>
+                <ng-template let-element pTemplate="listItem">
+                    <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+                        <div class="ui-g-3" style="text-align:center">
+                            <img style="width: 200px;" src="{{element.product.image}}">
+                        </div>
+                        <div class="ui-g-4">
+                            <div class="ui-g">
+                                <div class="ui-g-4">{{'MODEL_KEY' | translate}} : </div>
+                                <div class="ui-g-8">
+                                    <b>{{element.product.model}}</b>
+                                </div>
+
+                                <div class="ui-g-4">{{'BRAND' | translate}} : </div>
+                                <div class="ui-g-8">
+                                    <b>{{element.product.brand}}</b>
+                                </div>
+
+                                <div class="ui-g-4">{{'LABEL' | translate}} : </div>
+                                <div class="ui-g-8">
+                                    <b>{{element.product.wording}}</b>
+                                </div>
+
+                                <div class="ui-g-4">{{'QTE_ASKED' | translate}} : </div>
+                                <div class="ui-g-8">
+                                    <b>{{element.qteAsked}} {{'UNIT' | translate}}</b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-g-5" *ngIf="element.response">
+                            <div class="inline">
+                                <label class="one" for="price">{{'RESPONSE_HT' | translate}} : </label>
+
+                                <div class="one">{{element.response.unitPriceHT}} Dh</div>
+
+                            </div>
+                            <div class="inline">
+                                <label class="one" for="price">{{'DISCOUNT' | translate}} : </label>
+
+                                <div class="one">{{element.response.discount}} %</div>
+
+                            </div>
+                            <div class="inline">
+                                <label class="one" for="UnitPriceDiscounted">{{'UNIT_PRICE_DISOUNTED' | translate}} : </label>
+
+                                <div class="one">{{element.response.unitPriceDiscounted}} Dh</div>
+
+                            </div>
+                            <div class="inline" style="border: 1px solid;">
+                                <label class="one" for="UnitPriceDiscounted">{{'TOTAL_PRICE_DISOUNTED' | translate}} : </label>
+
+                                <div class="one">{{element.response.totalUnitPriceDiscounted}} Dh</div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-template>
+
+            </p-dataView>
+
+            <div class="ui-g-12 ui-widget" style="border : 1px solid #d4d4d4; background-color: #fafafa; color: #ff421c; ">
+                <div class="ui-g-4" style="font-size: 1.2em;">{{'DELAY' | translate}} : </div>
+                <div class="ui-g-5">
+                    <div class="ui-g-8">
+
+                        <b>{{quotationDetail.delay}} {{quotationDetail.type}}</b>
+
+                    </div>
+                </div>
+                <div class="ui-g-5" style="font-size: 1.2em;">
+                    <div class="ui-g-4">{{'THT' | translate}} : </div>
+                    <div class="ui-g-8">
+
+                        <b>{{quotationDetail.tht}} Dh</b>
+
+                    </div>
+
+                    <div class="ui-g-4">{{'TTTC' | translate}} : </div>
+                    <div class="ui-g-8">
+
+                        <b>{{quotationDetail.tttc}} Dh</b>
+
+                    </div>
+                    <div class="ui-g-4">{{'STATUS' | translate}} : </div>
+                    <div class="ui-g-8">
+                        <b>{{quotationDetail.status | translate}}</b>
+                    </div>
+
+                </div>
+                <div class="ui-g-6 ui-g-offset-6">
+                    <button pButton class="btn btn-primary" label="Retour a la liste des devis" [routerLink]="['/quotation-list']"></button>
+                </div>
+            </div>
+        </p-fieldset>
+
+
+        <br>
+
+        <p-fieldset class="ui-g-12" legend="Discussion" [toggleable]="false">
+            <div *ngIf="quotationDetail">
+                <div class="clearfix">
+                    <div class="ui-g-12">
+                        <div class="chat-header clearfix">
+                            <div class="profil-card">
+                            </div>
+                            <div class="chat-about">
+                                <div class="chat-with">{{'TALKWITH' | translate}} {{quotationDetail.commercial}}</div>
+                                <div class="chat-num-messages">{{'NBMESSAGE' | translate}} {{messagesLength}} </div>
+                            </div>
+                        </div>
+                        <!-- end chat-header -->
+                        <div *ngIf="filled">
+
+                            <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="chat-history">
+                                <ul>
+                                    <div *ngFor="let element of quotationDetail.discussion.messages">
+                                        <div *ngIf="quotationDetail.commercial === element.senderFullName;else second">
+                                            <div>
+                                                <div class="message-data">
+                                                    <span class="message-data-name">
+                                                        <i class="fa fa-circle me mo"></i> {{element.senderFullName}}</span>
+                                                    <span class="message-data-time">{{element.date | date :'short'}}</span>
+                                                </div>
+                                                <div class="message my-message">
+                                                    {{element.message}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <ng-template #second>
+                                            <div class="clearfix">
+                                                <div class="message-data align-right">
+                                                    <span class="message-data-time">{{element.date | date :'short'}}</span>
+                                                    <span class="message-data-name">{{element.senderFullName}}</span>
+                                                    <i class="fa fa-circle me"></i>
+
+                                                </div>
+                                                <div class="message other-message tri-right float-right">
+                                                    {{element.message}}
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </div>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+                        <!-- end chat-history -->
+
+                        <div class="chat-message clearfix">
+                            <textarea pInputTextarea name="message-to-send" id="message-to-send" placeholder="{{'ENTERMESSAGE' | translate}}" rows="3"
+                                [(ngModel)]="messageToSend"></textarea>
+                            <p-progressSpinner *ngIf="showMessageSave" [style]="{width: '30px', height: '30px'}" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+                            <button pButton class="btn btn-primary" label="{{'SEND' | translate}}" (click)="pushMessage()"></button>
+                        </div>
+                        <!-- end chat-message -->
+
+                    </div>
+                    <!-- end chat -->
+
+                </div>
+                <!-- end container -->
+            </div>
+        </p-fieldset>
+
+    </ng-template>
+</div>

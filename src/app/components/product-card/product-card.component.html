@@ -1,0 +1,17 @@
+<p-card styleClass="ui-card-shadow" [style]="{height : '450px'}">
+    <p-header>
+        <img class="new-corner" *ngIf="false" src="assets/images/New-Corner.png"/>
+        <div class="img-container">
+            <img class="product-thumbnail" src="{{product.thumbnail}}" />
+        </div>
+    </p-header>
+    <div style="text-align: center; height: 160px;">
+        <app-line></app-line>
+        <h4>{{product.label}}</h4>
+        <p>{{product.model}}</p>
+        <span class="brand">{{product.brand | uppercase}}</span>
+    </div>
+    <p-footer class="ui-fluid">
+        <button pButton type="button" [routerLink]="['/product-detail', {model : product.model, brand : product.brand}]" label="Détail"></button>
+    </p-footer>
+</p-card>

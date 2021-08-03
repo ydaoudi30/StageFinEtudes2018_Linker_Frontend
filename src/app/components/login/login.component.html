@@ -1,0 +1,42 @@
+<div class="ui-g-12">
+
+    <p-messages [(value)]="msgs"></p-messages>
+    <div class="ui-g-4 ui-g-offset-4 header">
+        <div class="ui-g-12">
+            <div class="ui-g-6 ui-g-offset-3">
+                <img class="logo" src="assets/images/linker.png" />
+            </div>
+        </div>
+        <div class="ui-g-12 login">
+            <form (ngSubmit)="login()" [formGroup]="loginForm">
+
+                <div class="ui-g-12">
+                    <span style="color:#ff0000" *ngIf="email.touched && email.errors">
+                        <i class="fa fa-exclamation-circle fa-lg" style="color:#ff431d" aria-hidden="true">
+                        </i> Erreur :
+                        <span *ngIf="email.touched && email.errors?.required">Required</span>
+                        <span *ngIf="email.touched && email.errors?.email">Email</span>
+                    </span>
+                    <input formControlName="email" type="text" placeholder="Email" name="user">
+                </div>
+                <div class="ui-g-12">
+                    <span style="color:#ff0000" *ngIf="password.touched && password.errors">
+                        <i class="fa fa-exclamation-circle fa-lg" style="color:#ff431d" aria-hidden="true">
+                        </i> Erreur :
+                        <span *ngIf="password.touched && password.errors?.required">Required</span>
+                        <span *ngIf="password.touched && password.errors?.email">Email</span>
+                    </span>
+                    <input formControlName="password" type="password" placeholder="Mot de passe" name="password">
+                </div>
+                <div class="ui-g-12">
+                    <input type="submit" value="{{'CONNEXION' | translate}}">
+                </div>
+                <div class="ui-g-12">
+                    <input class="btn_subscribtion" type="button" [routerLink]="['/sign-up/true']" value="{{'SUBSCRIBTION_KEY' | translate}}">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<app-merge-dialog [guestEmail]="guestEmail" [display]="display"></app-merge-dialog>

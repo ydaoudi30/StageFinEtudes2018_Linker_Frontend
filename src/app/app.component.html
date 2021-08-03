@@ -1,0 +1,18 @@
+<app-home-header></app-home-header>
+<div class="ui-g ui-g-nopad" 
+    [ngClass]="{'sideBarEffect': visibleSideBar, 'inverseSideBarEffect': !visibleSideBar}">
+    <div class="ui-g-12 ui-g-nopad">
+        <div class="ui-g-12 ui-g-nopad" style="min-height: 600px; margin-top: 120px;">
+
+            <router-outlet></router-outlet>
+
+        </div>
+    </div>
+</div>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="450"></p-confirmDialog>
+<p-growl [(value)]="msgs"></p-growl>
+
+
+<div class="ui-g-12 ui-g-nopad">
+    <app-home-footer></app-home-footer>
+</div>

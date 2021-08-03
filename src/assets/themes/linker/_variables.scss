@@ -1,0 +1,55 @@
+$fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Segoe UI Symbol";
+$fontSize: 1em;
+$borderRadius: 1px;
+$disabledOpacity: 0.35;
+
+//Header
+$headerBorderWidth: 1px;
+$headerBorderColor: #333333;
+$headerBgColor: #333333;
+$headerTextColor: #ffffff;
+$headerFontWeight: 500;
+$headerIconTextColor: #ffffff;
+
+//Content
+$contentBorderWidth: 1px;
+$contentBorderColor: #e6e6e6;
+$contentBgColor: #ffffff;
+$contentTextColor: #414550;
+
+//Default State
+$stateDefaultBorderWidth: 1px;
+$stateDefaultBorderColor: #2f2f2f;
+$stateDefaultBgColor: #2f2f2f;
+$stateDefaultTextColor: #ffffff;
+
+//Active State
+$stateActiveBorderColor: #ff431d;
+$stateActiveBgColor: #ff431d;
+$stateActiveTextColor: #ffffff;
+
+//Highlight State
+$stateHighlightBorderColor: #ff431d;
+$stateHighlightBgColor: #ff431d;
+$stateHighlightTextColor: #ffffff;
+
+//Focus State
+$stateFocusBorderColor: #ff431d;
+$stateFocusBgColor: #ff431d;
+$stateFocusTextColor: #081c22;
+
+//Error State
+$stateErrorBorderColor: #ec4e4e;
+$stateErrorBgColor: #ec4e4e;
+$stateErrorTextColor: #ffffff;
+
+//Hover State
+$stateHoverBorderColor: #6A6A6A;
+$stateHoverBgColor: #6A6A6A;
+$stateHoverTextColor: #ffffff;
+
+//Forms
+$inputBgColor: #ffffff;
+$inputTextColor: #333333;
+$invalidInputBorderColor: #ec4e4e;
+$inputGroupTextColor: #333333;

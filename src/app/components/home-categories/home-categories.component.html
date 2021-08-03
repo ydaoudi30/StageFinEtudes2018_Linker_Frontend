@@ -1,0 +1,37 @@
+<!--p-fieldset class="ui-g-10 ui-g-offset-1" legend="Catégories"-->
+<div class="ui-g-10 ui-g-offset-1">
+    <div class="ui-g-12">
+        <h2>Catégories :</h2>
+    </div>
+    <p-accordion class="ui-g-6">
+        <p-accordionTab *ngFor="let item of catalogPart1" header="{{item.label}}">
+            <ng-container *ngTemplateOutlet="recursive; context:{ $implicit: item }"></ng-container>
+        </p-accordionTab>
+    </p-accordion>
+
+    <p-accordion class="ui-g-6">
+        <p-accordionTab *ngFor="let item of catalogPart2" header="{{item.label}}">
+            <ng-container *ngTemplateOutlet="recursive; context:{ $implicit: item }"></ng-container>
+        </p-accordionTab>
+    </p-accordion>
+<!--/p-fieldset-->
+</div>
+
+
+<ng-template #recursive let-category>
+    <div *ngIf="!category.finalCategory && !category.childs[0].finalCategory">
+        <p-accordion>
+            <p-accordionTab *ngFor="let item of category.childs" header="{{item.label}}">
+                <ng-container *ngTemplateOutlet="recursive; context:{ $implicit: item }"></ng-container>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+    <div *ngIf="!category.finalCategory && category.childs[0].finalCategory">
+        <div *ngFor="let item of category.childs" class="finalCategory">
+
+                <a [routerLink]="['/product-list',item.refCategory]"  (onClick)="detail()"> + {{item.label}}</a>
+    
+            
+        </div>
+    </div>
+</ng-template>

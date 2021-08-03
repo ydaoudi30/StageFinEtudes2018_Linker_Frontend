@@ -1,0 +1,73 @@
+<div class="ui-g-10 ui-g-offset-1 ui-g-nopad">
+    <span *ngIf="quoteList">
+        <p-dropdown [options]="commercials" [(ngModel)]="selectedCommercial" (click)="dropDownValue(selectedCommercial)" optionLabel="value"
+            placeholder="Selectionnez l'exposant"></p-dropdown>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div *ngIf="selectedCommercial">
+                <div *ngFor="let quote of quoteList">
+                    <br>
+                    <div *ngIf="com === quote.commercial">
+                        <br>
+
+                        <p-dataView #dv [value]="quote.quoteElementList" [paginator]="true" paginatorPosition="bottom" [sortField]="sortField" [rows]="20">
+                            <p-header>
+                                Reference du devis : {{quote.reference}}
+                            </p-header>
+
+                            <ng-template let-quoteElement pTemplate="listItem">
+                                <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+                                    <div class="ui-g-3" style="text-align:center">
+                                        <img style="width: 100px;" src="{{quoteElement.product.image}}">
+                                        <br>
+                                        <b>
+                                            <div>
+                                                Modéle : {{quoteElement.product.model}}
+                                                <br> Fabricant : {{quoteElement.product.manufacturer}}
+                                            </div>
+                                        </b>
+                                    </div>
+
+                                    <div class="ui-g-6">
+                                        <div class="ui-g">
+                                            <div class="ui-g-6" *ngFor="let char of quoteElement.product.characteristics">
+                                                <b>{{char.label}} : {{char.value.value}} {{char.unit}}</b>
+                                                <br>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="ui-g-2" formGroupName="{{getFormKey(quoteElement.product.brand,quoteElement.product.model)}}">
+                                        <label for="quantity">Quantité</label>
+                                        <app-form-input [inputType]="'number'" formControlName="quantity" [formControl]="quantityOf(getFormKey(quoteElement.product.brand,quoteElement.product.model))"
+                                            [label]="'Quantité'"></app-form-input>
+                                    </div>
+
+                                    <div class="ui-g-1" style="text-align: center">
+                                        <button type="button" pButton (click)="remove(quoteElement.product.model,quoteElement.product.brand,quote.reference,quote.discussion.commercialEmail)"
+                                            icon="fa fa-trash-o fa-2x" class="ui-button-danger" style="width: 50px;height : 50px;"></button>
+                                    </div>
+
+                                </div>
+
+                            </ng-template>
+
+
+
+                        </p-dataView>
+
+                        <br>
+                        <div *ngIf="com">
+                            <button pButton class="btn btn-primary" type="submit" label="Envoyé la demande de devis"></button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </span>
+
+</div>

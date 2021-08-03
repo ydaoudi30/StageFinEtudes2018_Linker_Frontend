@@ -1,0 +1,63 @@
+<div class="ui-g-10 ui-g-no-pad ui-g-offset-1" *ngIf="product">
+
+    <div class="ui-g-6">
+        <p-galleria [images]="galleryImages" styleClass="completa" [panelWidth]="width" [panelHeight]="313" [showCaption]="false"></p-galleria>
+    </div>
+    <div class="ui-g-6">
+        <p-card [style]="{height: '360px'}">
+            <div class="ui-g-12 product-info">
+                <h2>{{product.label}}</h2>
+                <h5 style="color : grey; font-style : italic;">
+                    <ng-container> {{'REF_PRODUCT' | translate}} : </ng-container> {{product.model}}
+                </h5>
+                <h5 style="font-style : italic;">
+                    <ng-container> {{'BRAND_LABEL' | translate}} : </ng-container> {{product.brandLabel | uppercase}}
+                </h5>
+            </div>
+            <div class="ui-g-12">
+                <p-listbox [options]="availableCommercials" [style]="addCommercialWidth" [(ngModel)]="selectedCommercials" multiple="multiple"
+                    checkbox="checkbox" filter="filter">
+                    <p-header>
+                        <i class="fa fa-users"></i>
+                        {{'COMMERCIAL_LIST' | translate}}
+                    </p-header>
+                    <ng-template let-item let-i="index" pTemplate="item">
+                        {{item.value.fullName}} @{{item.value.company}}
+                    </ng-template>
+                </p-listbox>
+            </div>
+            <div class="ui-g-12">
+                <button pButton style="float: right;" type="button" label="{{'CART_ADD' | translate}}" (click)="addProductToCommercialCart()"></button>
+            </div>
+        </p-card>
+    </div>
+
+    <p-fieldset class="ui-g-12" legend="{{'DESCRIPTION' | translate}}">
+        <div [innerHtml]="product.description"></div>
+        <!--ng-template dynamic-template [template]="product.description">
+        </ng-template-->
+    </p-fieldset>
+
+    <p-fieldset class="ui-g-12" legend="{{'CARACTERISTICS' | translate}}">
+        <div class="ui-g-3" *ngFor="let characteristic of product.characteristics">
+            <li>{{characteristic.label}} :
+                <ng-container *ngIf="characteristic.valueType == 'SIMPLE_VALUE'">
+                    {{characteristic.value.value}}
+                    <ng-container *ngIf="!characteristic.textFormatOnly">{{characteristic.unit}}</ng-container>
+                </ng-container>
+                <ng-container *ngIf="characteristic.valueType == 'MIN_MAX_VALUE'">
+                    <br> Min : {{characteristic.value.min}}
+                    <ng-container *ngIf="!characteristic.textFormatOnly">{{characteristic.unit}}</ng-container>
+                    <br> Max : {{characteristic.value.max}}
+                    <ng-container *ngIf="!characteristic.textFormatOnly">{{characteristic.unit}}</ng-container>
+                </ng-container>
+                <ng-container *ngIf="characteristic.valueType == 'LIST_VALUE'">
+                    <ng-container *ngFor="let value of characteristic.value.list">
+                        {{value.value}}
+                        <ng-container *ngIf="!characteristic.textFormatOnly">{{characteristic.unit}}</ng-container>,
+                    </ng-container>
+                </ng-container>
+            </li>
+        </div>
+    </p-fieldset>
+</div>

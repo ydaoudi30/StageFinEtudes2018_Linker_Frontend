@@ -1,0 +1,25 @@
+.new-corner{
+    width: 60px;
+    position: absolute;
+    margin: -7px;
+}
+
+.brand{
+    color: #ff431d;
+}
+
+.product-thumbnail{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.img-container{
+    height: 200px;
+}
+
+.img-container img{
+    max-height: 200px;
+    width: auto;
+    max-width: 100%;
+}

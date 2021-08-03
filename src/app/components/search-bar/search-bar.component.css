@@ -1,0 +1,20 @@
+.container-1 input#search::-webkit-input-placeholder {
+  color: #ff431d;
+}
+
+.container-1 input#search:-moz-placeholder { 
+  color: #ff431d;  
+}
+
+.container-1 input#search::-moz-placeholder { 
+  color: #ff431d;  
+}
+
+.container-1 input#search:-ms-input-placeholder {  
+  color: #ff431d;  
+}
+
+.container-1 input#search:hover, .container-1 input#search:focus, .container-1 input#search:active{
+  outline:none;
+  background: #ffffff;
+}

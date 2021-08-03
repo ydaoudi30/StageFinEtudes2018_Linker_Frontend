@@ -1,0 +1,14 @@
+<div class="ui-g-12 ui-g-nopad shortProfil">
+ 
+  <div (mouseleave)="menu.hide($event)">
+      <div *ngIf="loggedIn" (mouseenter)="menu.show($event)" class="profil-box">
+          <a>
+              <span>{{user.firstName}} {{user.lastName}}</span>
+              <div class="profil-card">
+              </div>
+              <i class="fa fa-sort-desc"></i>
+          </a>
+      </div>
+      <p-menu #menu popup="popup" [model]="items" [style]="{width:'250px'}"></p-menu>
+  </div>
+</div>

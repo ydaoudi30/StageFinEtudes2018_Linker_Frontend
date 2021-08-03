@@ -1,0 +1,40 @@
+<div class="ui-g-8 ui-g-offset-2 border">
+    <div class="ui-g-4">
+        <h2 class="ui-g-12" style="text-align: center">
+            {{'INSCRIPTION_KEY' | translate}}
+        </h2>
+        <img class="ui-g-8 ui-g-offset-2" src="/assets/images/default_profile.png" alt="">
+    </div>
+    <form class="ui-g-8" (ngSubmit)="signUp()" [formGroup]="form">
+        <p class="ui-g-12">{{'CUSTOMER_PROFILE_KEY' | translate}}</p>
+        <div class="ui-g-12 entry">
+            <label class="ui-g-3" for="email">{{'EMAIL_KEY' | translate}} : </label>
+            <app-form-input class="ui-g-9" [size]="'45'" [inputType]="'text'" formControlName="email" [formControl]="email" [label]="'EMAIL_KEY'"></app-form-input>
+        </div>
+        <div class="ui-g-12 entry">
+            <label class="ui-g-3" for="password">{{'PASSWORD_KEY' | translate}} : </label>
+            <app-form-input class="ui-g-9" [size]="'45'" [inputType]="'password'" formControlName="password" [formControl]="password" [label]="'PASSWORD_KEY'"></app-form-input>
+        </div>
+        <div class="ui-g-12 entry">
+            <label class="ui-g-3" for="firstName">{{'FIRST_NAME_KEY' | translate}} : </label>
+            <app-form-input class="ui-g-9" [size]="'45'" [inputType]="'text'" formControlName="firstName" [formControl]="firstName" [label]="'FIRST_NAME_KEY'"></app-form-input>
+        </div>
+        <div class="ui-g-12 entry">
+            <label class="ui-g-3" for="lastName">{{'LAST_NAME_KEY' | translate}} : </label>
+            <app-form-input class="ui-g-9" [size]="'45'" [inputType]="'text'" formControlName="lastName" [formControl]="lastName" [label]="'LAST_NAME_KEY'"></app-form-input>
+        </div>
+        <div class="ui-g-12 entry">
+            <label class="ui-g-3" for="phone">{{'PHONE_KEY' | translate}} : </label>
+            <app-form-input class="ui-g-9" [size]="'45'" [inputType]="'text'" formControlName="phone" [formControl]="phone" [label]="'PHONE_KEY'"></app-form-input>
+        </div>
+        <div class="ui-g-12 entry">
+            <label class="ui-g-3" for="company">{{'COMPANY_KEY' | translate}} : </label>
+            <app-form-input class="ui-g-9" [size]="'45'" [inputType]="'text'" formControlName="company" [formControl]="company" [label]="'COMPANY_KEY'"></app-form-input>
+        </div>
+        <div class="ui-g-12">
+            <button pButton style="float:right" icon="fa-plus" type="submit" label="{{'SIGNUP_KEY' | translate}}"></button>
+        </div>
+    </form>
+</div>
+
+<app-merge-dialog [guestEmail]="guestEmail" [display]="display"></app-merge-dialog>

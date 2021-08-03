@@ -1,0 +1,59 @@
+<div class="ui-g-12">
+
+	<span *ngIf="!quotations">
+		<div align="center" class="lds-css ng-scope">
+			<div style="width:100%;height:100%" class="lds-rolling">
+				<div></div>
+			</div>
+		</div>
+	</span>
+
+	<p-fieldset legend="{{'QUOTE_LIST' | translate}}" class="ui-g-12" *ngIf="quotations">
+
+		<p-table #dt [columns]="cols" [globalFilterFields]="cols" [value]="quotations" [loading]="loading" [paginator]="true" [rows]="10">
+			<ng-template pTemplate="caption">
+				<div style="display: block;">
+					<i class="fa fa-search" style="margin:8px 8px 0 0;"></i>
+					<input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+					 style="width:auto">
+				</div>
+			</ng-template>
+			<ng-template pTemplate="header">
+				<tr>
+					<th *ngFor="let col of cols">
+						{{col.header | translate}}
+					</th>
+					<th>
+						{{'ACTION_KEY' | translate}}
+					</th>
+				</tr>
+				<tr>
+					<th *ngFor="let col of cols">
+						<input *ngIf="col.field == 'reference' || col.field == 'customer'" style="width: 80px;" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+						<p-multiSelect [filter]="false" *ngIf="col.field == 'status'" [options]="status" defaultLabel="Status" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
+						<div *ngIf="col.field == 'tttc'">
+							<i class="fa fa-close" (click)="ttcFilter=null;dt.filter(null, col.field, col.filterMatchMode)" style="cursor:pointer"></i>
+							<p-slider pTooltip="{{rangeValues[0] + ' - ' + rangeValues[1]}}" [range]="true" [min]="0" [max]="10000" [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="rangeValues" (onChange)="onYearChange($event, dt)"></p-slider>
+						</div>
+					</th>
+					<th></th>
+				</tr>
+			</ng-template>
+			<ng-template pTemplate="body" let-quote>
+				<tr>
+					<td *ngFor="let col of cols" style="text-align: center">
+						<span *ngIf="col.field != 'dateRequest' && col.field != 'delay' && col.field != 'status'">{{quote[col.field]}}</span>
+						<span *ngIf="col.field == 'dateRequest'">{{quote.dateRequest | date :'short'}}</span>
+						<span *ngIf="col.field == 'delay'">{{quote.delay}} {{quote.type}}</span>
+						<span *ngIf="col.field == 'status'">{{quote.status | translate}}</span>
+					</td>
+					<td style="text-align: center">
+						<button type="button" pButton [routerLink]="['/quotation-detail',quote.reference]" label="{{'DETAIL' | translate}}" (onClick)="detail()" ></button>
+					</td>
+				</tr>
+			</ng-template>
+		</p-table>
+
+	</p-fieldset>
+
+</div>

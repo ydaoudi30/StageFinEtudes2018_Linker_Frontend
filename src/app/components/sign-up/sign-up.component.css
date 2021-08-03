@@ -1,0 +1,8 @@
+.entry {
+    display: inline-flex;
+    align-items: center;
+}
+
+.border{
+    border: 1px solid rgb(255, 67, 29);
+}

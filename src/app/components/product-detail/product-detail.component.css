@@ -1,0 +1,19 @@
+ 
+.ui-panel-images{
+    max-width: 500px;
+    max-height: 313px;
+    position:absolute;
+    margin:auto;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+
+.card-min-height {
+    /*min-height: 60px;*/
+}
+
+.product-info{
+    color: #ff431d;
+}

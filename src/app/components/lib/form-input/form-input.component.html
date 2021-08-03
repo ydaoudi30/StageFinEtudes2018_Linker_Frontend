@@ -1,0 +1,19 @@
+
+<input type="number" *ngIf="inputType == 'number'" [(ngModel)]="inputValue" (ngModelChange)="change($event)" pInputText
+placeholder="{{label | translate}}" class="ng-dirty ng-invalid">
+
+<p-dropdown [autoWidth]="false" *ngIf="inputType == 'dropdown'" [options]="inputData" [(ngModel)]="inputValue" (ngModelChange)="change($event)"
+optionLabel="{{optionLabel}}"></p-dropdown>
+
+<input type="text" *ngIf="inputType == 'text'" [size]="size" [(ngModel)]="inputValue" (ngModelChange)="change($event)" pInputText placeholder="{{label | translate}}"
+class="ng-dirty ng-invalid">
+
+<input type="password" *ngIf="inputType == 'password'" [size]="size" [(ngModel)]="inputValue" (ngModelChange)="change($event)" pPassword placeholder="{{label | translate}}"
+class="ng-dirty ng-invalid">
+
+
+
+<p-message severity="error" *ngIf="formControl.touched && formControl.errors?.required" text="required"></p-message>
+<p-message severity="error" *ngIf="formControl.touched && formControl.errors?.email" text="email"></p-message>
+<p-message severity="error" *ngIf="formControl.errors?.discountControl" text="Does not fit logic conditions"></p-message>
+<p-message severity="error" *ngIf="formControl.errors?.min" text="Should be positive"></p-message>

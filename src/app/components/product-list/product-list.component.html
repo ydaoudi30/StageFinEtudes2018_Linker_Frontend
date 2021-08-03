@@ -1,0 +1,55 @@
+<div class="ui-g-12">
+    <div class="ui-g-2" *ngIf="true">
+        <span *ngFor="let i of rangeFilters">
+            <span *ngFor="let j of i.value">
+                <span *ngFor="let k of sliderObject">
+                    <span *ngIf="k.unit === j.unit">
+                        <!--<span *ngIf="!(k.minMax[0] === k.minMax[1])">-->
+                        <h3>{{i.label}}</h3>
+                        <h3>Range: {{k.minMax[0] + ' - ' + k.minMax[1]}} {{j.unit}}</h3>
+                        <p-slider [(ngModel)]="k.minMax" [style]="{'width':'14em'}" [range]="true" [min]="k.min" [max]="k.max"></p-slider>
+                        <button pButton style="margin-top: 10px;" type="button" (click)="sendRange(i.label,k.minMax[0] ,k.minMax[1], j.unit)" label="Filtrer"></button>
+                        <!--</span>-->
+                    </span>
+                </span>
+
+            </span>
+
+        </span>
+
+        <span *ngFor="let x of dropdownFilters">
+            <h3>{{x.label}}</h3>
+            <span *ngFor="let option of options">
+                <span *ngIf="x.label === option.label">
+                    <p-dropdown [options]="option.listdropdown" [(ngModel)]="selectedFilter" optionLabel="label" (onChange)="DropDownValue(selectedFilter);sendDropDown(x.label)"
+                        [style]="{'width':'150px'}" editable="true" placeholder="Selectionnez un filtre"></p-dropdown>
+                </span>
+            </span>
+
+        </span>
+    </div>
+    <div class="ui-g-9">
+        <p-dataGrid #dv *ngIf="searchResult" [value]="searchResult.productlist" [paginator]="true"
+            [rows]="20">
+            <p-header>
+                Liste de produits: {{refCat}}
+            </p-header>
+
+            <ng-template let-product pTemplate="gridItem">
+
+                <div style="padding:.5em" class="ui-g-12 ui-md-3">
+                    <!--<p-panel [header]="car.vin" [style]="{'text-align':'center'}">-->
+                    <app-product-card [product]="product"></app-product-card>
+                    <hr class="ui-widget-content" style="border-top:0">
+                    <!--<button pButton type="button" icon="pi pi-search" (click)="selectCar($event, car)" style="margin-top:0"></button>-->
+                    <!--</p-panel>-->
+                </div>
+            </ng-template>
+
+        </p-dataGrid>
+    </div>
+
+</div>
+<div class="ui-g-2 ui-g-offset-5" *ngIf="!searchResult">
+    <p-progressSpinner class="spinner"></p-progressSpinner>
+</div>

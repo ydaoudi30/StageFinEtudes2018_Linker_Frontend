@@ -1,0 +1,7 @@
+.line {
+    border-bottom: 1px solid #ff431d;
+    height: 0px !important;
+    padding: 0px !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

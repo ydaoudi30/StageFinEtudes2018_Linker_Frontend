@@ -1,0 +1,79 @@
+.profil-card{
+    width: 37px !important;
+    height: 37px !important;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 0px solid #0A0A0A;
+    background-image: url(/assets/images/default_user.png);    
+}
+
+.profil-card div{
+    position: absolute;
+    background-color: #343434;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+/*.shortProfil{
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 2%;
+    box-shadow: 0 1px 3px -1px rgba(0,0,0,0.10), 0 1px 1px 0 rgba(0,0,0,.12), 0 1px 8px -13px rgba(0,0,0,.2);
+    height: 62px;
+    display: flex;
+}*/
+
+.profil-box{
+    position: absolute;
+    right: 0;
+    margin-right: 2%;
+    padding: 15px 15px;
+    cursor: pointer;
+    height: 62px;
+    top: 0;
+}
+
+.profil-box:hover{
+    background-color: #eef2f6;
+}
+
+.profil-box a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.profil-box a i{
+    margin-left: 10px;
+    margin-top: -7px;
+}
+
+.profil-box a span{
+    margin-right: 10px;
+    font-size: 14px;
+    line-height: 21px;
+    color: #212121;
+}
+
+.logo-text{
+    font-family: Helvetica;
+    font-size: 30px;
+    margin-left: 2px;
+    color: #4e4e4e;
+    padding-left: 6px;
+}
+
+.logo-box{
+    display: flex; 
+    align-items:center;
+    cursor: pointer;
+}
+
+.logo-img{
+    width:40px; 
+    margin-left: 70px;
+}

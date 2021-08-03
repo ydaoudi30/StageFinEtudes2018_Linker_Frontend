@@ -1,0 +1,52 @@
+<!--div class="ui-g header">
+    <div class="ui-g-12">
+        <div class="ui-g-1 ui-g-nopad">
+            <img style="width: 90%;" src="assets/images/linker.png">
+        </div>
+        <div class="ui-g-5 ui-g-nopad ui-g-offset-6 menu">
+            <ul>
+                <li class="current_page_item"><a href="#">Accueil</a></li>
+                <li><a href="#">Recherche</a></li>
+                <li><a href="#">Catégories</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</div-->
+
+<!-- Header -->
+<header id="header" style="display: flex; align-items: center; justify-content: space-between;">
+    <a class="logo" href="#">
+        <img src="assets/images/logo.PNG" />
+        <span>Linker</span>
+    </a>
+    <div class="menu" style="margin-right: auto; margin-left: auto; padding-right: 1%;">
+        <ul>
+            <li routerLinkActive="current_page_item" pTooltip="Accueil" tooltipPosition="bottom">
+                <a [routerLink]="['/home']">
+                    <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li *ngIf="!connected" routerLinkActive="current_page_item" pTooltip="Inscription" tooltipPosition="bottom">
+                <a [routerLink]="['/sign-up/false']">
+                    <i class="fa fa-sign-in fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li *ngIf="!connected" routerLinkActive="current_page_item" pTooltip="Connexion" tooltipPosition="bottom">
+                <a [routerLink]="['/login']">
+                    <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li routerLinkActive="current_page_item" pTooltip="Panier" tooltipPosition="bottom">
+                <a [routerLink]="['/cart']">
+                    <i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i>
+                    <div class="numberCircle">{{articleNumber}}</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="menu" style="margin-right: 14px">
+        <short-profil *ngIf="connected" [loggedIn]="connected"></short-profil>
+        <a *ngIf="!connected" [routerLink]="['/sign-up-commercial']" class="combecame">Devenir Commercial</a>
+    </div>
+</header>

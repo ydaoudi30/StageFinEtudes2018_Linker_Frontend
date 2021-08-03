@@ -1,0 +1,74 @@
+<div *ngIf="cart">
+    <p-dialog [(visible)]="display" [width]="1500" [height]="1500">
+        <h1 align="center">Choisissez les produits que vous voulez ajouter au panier </h1>
+        <p-header>
+            Cart Merger
+        </p-header>
+
+
+
+        <br> Exposant :
+        <p-dropdown [options]="commercials" [(ngModel)]="selectedCommercial" (click)="dropDownValue(selectedCommercial)" optionLabel="value"
+            placeholder="Selectionnez l'exposant" [style]="{'width':'150px'}"></p-dropdown>
+
+        <br>
+        <br>
+        <br>
+
+        <p-dataView #dv [value]="cart.listCommercialCartDto" [paginator]="true" paginatorPosition="bottom" [sortField]="sortField"
+            [rows]="20">
+            <p-header>
+                Panier
+            </p-header>
+            <ng-template let-comcart pTemplate="listItem">
+
+
+                <div *ngIf="com === comcart.commercial">
+                    <div *ngFor="let product of comcart.listProduct">
+
+                        <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+                            <div class="ui-g-3" style="text-align:center">
+                                <img style="width: 100px;" src="{{product.images[0]}}">
+                                <br>
+                                <b>
+                                    <div>
+                                        {{'MODEL_KEY' | translate}} : {{product.model}}
+                                        <br> {{'BRAND_LABEL' | translate}} : {{product.brandLabel}}
+                                    </div>
+                                </b>
+                            </div>
+
+
+
+                            <div class="ui-g-8">
+                                <div class="ui-g">
+                                    <div class="ui-g-6" *ngFor="let char of product.characteristics">
+                                        <b>{{char.label}} : {{char.value.value}} {{char.unit}}</b>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <td style="text-align: center">
+                                <button type="button" pButton (click)="mergeOne(product.brandLabel,product.model,comcart.commercial)" icon="fa fa-random fa-1x"
+                                    style="width: 50px;height : 50px;"></button>
+                            </td>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </ng-template>
+
+
+        </p-dataView>
+
+
+        <br>
+
+        <button pButton type="button" (click)="retour()" label="Retour"></button>
+        <button pButton type="button" (click)="mergeAll()" label="Fusionner tout"></button>
+
+    </p-dialog>
+</div>

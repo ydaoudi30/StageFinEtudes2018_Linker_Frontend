@@ -1,0 +1,22 @@
+<!--div class="ui-g-12 ui-fluid ui-search-container">
+    <div class="ui-g-4 ui-g-offset-4 ui-g-nopad">
+        <form>
+            <div class="ui-inputgroup">
+                <input type="text" pInputText class="ui-search-input" placeholder="Rechercher par mot-clé ou référence">
+                <button pButton type="submit" class="ui-search-btn" icon="fa fa-search"></button>
+            </div>
+        </form>
+    </div>
+</div-->
+
+<div class="box" style="background: #1c1b1e; padding: 10px;">
+    <div class="container-1">
+        <form #searchForm="ngForm" (ngSubmit)="detail(searchForm.value)" style="display: flex; align-items: center;">
+            <span class="icon" style="padding: 10px;">
+                <button pButton icon="fa fa-search" type="submit" ></button>
+            </span>
+            <input style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px 10px; background-color: #1c1b1e; border: none; height: 38px; color: #FFF;width: 90%;"
+                type="search" id="search" placeholder="Marque, Produit ..." name="keyword" ngModel />
+        </form>
+    </div>
+</div>
